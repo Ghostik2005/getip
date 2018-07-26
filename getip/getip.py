@@ -36,7 +36,7 @@ def ip():
         r = None
         data = ""
         try:
-            with urllib.request.urlopen(service) as r: #ask the service
+            with urllib.request.urlopen(service, timeout=5) as r: #ask the service
                 data = str(r.headers)
                 data += r.read().decode()
                 eip = re.findall(search_re, data)[0].strip() #look for ip in response
