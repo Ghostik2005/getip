@@ -29,14 +29,14 @@ def ip():
         iip = "not available"
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as se: #connect via IPv4  with datagram based protocol
-                se.connect(("77.88.8.8", 80)) #connect to Yandex DNS Server
+                se.connect(("10.255.255.255", 1)) #connect to local address
                 iip = se.getsockname()[0]
         except Exception as e:
             print("internal getip ERROR:%s" %str(e), flush=True)
         r = None
         data = ""
         try:
-            with urllib.request.urlopen(service, timeout=5) as r: #ask the service
+            with urllib.request.urlopen(service, timeout=3) as r: #ask the service
                 data = str(r.headers)
                 data += r.read().decode()
                 eip = re.findall(search_re, data)[0].strip() #look for ip in response
